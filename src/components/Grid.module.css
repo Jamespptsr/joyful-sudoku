@@ -1,0 +1,128 @@
+/**
+ * Grid Styles
+ * 9x9 grid with box separation and coordinate labels
+ */
+
+/* Container for grid + labels */
+.gridWithLabels {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Top row with column numbers 1-9 */
+.columnLabels {
+  display: grid;
+  grid-template-columns: 32px repeat(9, 1fr);
+  width: 100%;
+  gap: 0;
+}
+
+.cornerSpacer {
+  width: 32px;
+}
+
+.columnLabel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* Grid row (labels + grid side by side) */
+.gridRow {
+  display: flex;
+  gap: 8px;
+}
+
+/* Left column with row letters A-I */
+.rowLabels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 32px;
+}
+
+.rowLabel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* The actual sudoku grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(9, 1fr);
+  gap: 0;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: white;
+  border: 2px solid var(--border-box);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* Add top and left borders for first row/column cells */
+.grid::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-top: 1px solid var(--border-default);
+  border-left: 1px solid var(--border-default);
+  pointer-events: none;
+  z-index: 0;
+  border-radius: 6px;
+}
+
+.gridCell {
+  position: relative;
+}
+
+/* Thicker borders for 3x3 box separation */
+.boxRight {
+  border-right: 2px solid var(--border-box) !important;
+}
+
+.boxBottom {
+  border-bottom: 2px solid var(--border-box) !important;
+}
+
+/* Responsive sizing */
+@media (max-width: 600px) {
+  .grid {
+    max-width: 100%;
+    border-radius: 4px;
+  }
+
+  .columnLabels {
+    grid-template-columns: 24px repeat(9, 1fr);
+    max-width: calc(100% + 24px + 8px);
+  }
+
+  .cornerSpacer {
+    width: 24px;
+  }
+
+  .rowLabels {
+    width: 24px;
+  }
+
+  .columnLabel,
+  .rowLabel {
+    font-size: 0.75rem;
+  }
+}

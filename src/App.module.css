@@ -1,0 +1,218 @@
+/**
+ * App Styles
+ * Main layout and game screen
+ */
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.gameContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--primary-light) 0%, white 100%);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90vw;
+  max-width: 500px;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.difficultyBadge {
+  padding: 6px 16px;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Difficulty-specific colors */
+.easy {
+  background-color: #c8e6c9;
+  color: #2e7d32;
+}
+
+.medium {
+  background-color: #ffe082;
+  color: #f57c00;
+}
+
+.hard {
+  background-color: #ffccbc;
+  color: #d84315;
+}
+
+.headerButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.button {
+  padding: 8px 16px;
+  border: 2px solid var(--border-default);
+  background-color: white;
+  color: var(--text-primary);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.button:hover:not(:disabled) {
+  background-color: var(--primary-light);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.gridContainer {
+  width: 90vw;
+  max-width: 500px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+  margin-bottom: 0;
+}
+
+.gridContainer.paused {
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+.pausedOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(0px);
+  z-index: 10;
+  pointer-events: all;
+}
+
+.pausedMessage {
+  background-color: white;
+  padding: 32px 48px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  filter: blur(0);
+}
+
+.pausedMessage p {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 24px 0;
+}
+
+.resumeButton {
+  padding: 12px 32px;
+  background-color: var(--primary-main);
+  color: var(--text-primary);
+  border: none;
+  border-radius: 8px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.resumeButton:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Numpad container - Primary gameplay controls */
+.numpadContainer {
+  width: 90vw;
+  max-width: 500px;
+  flex-shrink: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Action buttons container - Secondary controls */
+.actionButtonsContainer {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  width: 90vw;
+  max-width: 500px;
+  flex-shrink: 0;
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
+.actionButton {
+  flex: 1;
+  padding: 8px 10px;
+  font-size: 0.8rem;
+  min-height: 36px;
+}
+
+.actionButton.active {
+  background-color: var(--primary-main);
+  border-color: var(--primary-dark);
+  color: var(--text-primary);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .gameContainer {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .header {
+    max-width: 100%;
+  }
+
+  .gridContainer {
+    max-width: 100%;
+  }
+
+  .controls {
+    max-width: 100%;
+  }
+
+  .button {
+    padding: 6px 12px;
+    font-size: 0.875rem;
+  }
+
+  .actionButton {
+    padding: 10px 12px;
+    font-size: 0.75rem;
+  }
+}

@@ -1,0 +1,154 @@
+/**
+ * WelcomeScreen Styles
+ * Joyful, inviting design
+ */
+
+.welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 24px;
+  background: linear-gradient(135deg, var(--primary-light) 0%, white 100%);
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 12px 0;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  margin: 0 0 48px 0;
+  text-align: center;
+  max-width: 500px;
+}
+
+.resumeSection {
+  margin-bottom: 32px;
+}
+
+.difficultySection {
+  width: 100%;
+  max-width: 500px;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 24px 0;
+  text-align: center;
+}
+
+.difficultyButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.button {
+  padding: 20px 32px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.resumeButton {
+  background-color: var(--primary-main);
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  padding: 16px 48px;
+}
+
+.resumeButton:hover {
+  background-color: var(--primary-dark);
+}
+
+.difficultyButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background-color: white;
+  border: 2px solid var(--primary-main);
+  color: var(--text-primary);
+}
+
+.difficultyButton:hover {
+  background-color: var(--primary-light);
+}
+
+.buttonLabel {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.buttonDescription {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+/* Difficulty-specific colors */
+.easy {
+  border-color: #c8e6c9;
+}
+
+.easy:hover {
+  background-color: #c8e6c9;
+}
+
+.medium {
+  border-color: #ffe082;
+}
+
+.medium:hover {
+  background-color: #ffe082;
+}
+
+.hard {
+  border-color: #ffccbc;
+}
+
+.hard:hover {
+  background-color: #ffccbc;
+}
+
+/* Responsive sizing */
+@media (max-width: 600px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.25rem;
+  }
+
+  .buttonLabel {
+    font-size: 1.25rem;
+  }
+}

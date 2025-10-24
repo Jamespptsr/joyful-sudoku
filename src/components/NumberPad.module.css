@@ -1,0 +1,122 @@
+/**
+ * NumberPad Styles
+ * Joyful button design
+ */
+
+.numberPad {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  width: calc(100% - 40px);
+  max-width: calc(100% - 40px);
+  margin: 0;
+  margin-left: 40px;
+  padding: 0;
+}
+
+.numberButton {
+  aspect-ratio: 1;
+  border: 2px solid var(--primary-main);
+  background-color: white;
+  color: var(--text-primary);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  padding: 4px;
+  min-height: 45px;
+  max-height: 55px;
+}
+
+.numberButton:hover:not(:disabled) {
+  background-color: var(--primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.numberButton:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.numberButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Number display */
+.number {
+  font-size: clamp(1rem, 2.2vw, 1.3rem);
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* Counter display */
+.counter {
+  font-size: clamp(0.55rem, 1vw, 0.7rem);
+  font-weight: 600;
+  color: var(--text-secondary);
+  line-height: 1;
+  margin-top: 1px;
+}
+
+/* Complete state - all 9 placed (0 remaining) */
+.complete {
+  background-color: var(--bg-cell-given);
+  border-color: var(--border-default);
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.complete .number {
+  color: var(--text-secondary);
+}
+
+.complete .counter {
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+/* Erase button - no longer spans columns, integrated into grid */
+.eraseButton {
+  background-color: var(--bg-cell-given);
+  color: var(--error-text);
+}
+
+.eraseButton:hover:not(:disabled) {
+  background-color: var(--state-conflicting);
+}
+
+/* Responsive sizing */
+@media (max-width: 600px) {
+  .numberPad {
+    gap: 6px;
+    width: calc(100% - 32px);
+    max-width: calc(100% - 32px);
+    margin-left: 32px;
+  }
+
+  .numberButton {
+    padding: 3px;
+    min-height: 40px;
+    max-height: 50px;
+  }
+
+  .number {
+    font-size: clamp(0.9rem, 3.2vw, 1.2rem);
+  }
+
+  .counter {
+    font-size: clamp(0.5rem, 1.6vw, 0.65rem);
+  }
+
+  .eraseButton {
+    font-size: clamp(0.9rem, 3.2vw, 1.2rem);
+  }
+}

@@ -1,0 +1,113 @@
+/**
+ * Cell Styles
+ * Soft, joyful colors per theme
+ */
+
+.cell {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1;
+  border: none;
+  border-right: 1px solid var(--border-default);
+  border-bottom: 1px solid var(--border-default);
+  background-color: var(--bg-cell);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1rem, 4vw, 2rem);
+  font-weight: 500;
+  padding: 0;
+  position: relative;
+}
+
+.cell:hover:not(:disabled) {
+  background-color: var(--bg-cell-hover);
+  transform: scale(1.05);
+}
+
+.cell:disabled {
+  cursor: default;
+}
+
+/* Selected state - soft purple highlight */
+.cell.selected {
+  background-color: var(--primary-light);
+  border-right-color: var(--primary-main);
+  border-bottom-color: var(--primary-main);
+  box-shadow: 0 0 0 2px var(--primary-main);
+  z-index: 2;
+}
+
+/* Given cells - slightly darker background, bold text */
+.cell.given {
+  background-color: var(--bg-cell-given);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Related cells - same row/col/box as selected cell */
+.cell.related {
+  background-color: rgba(227, 190, 231, 0.15);
+}
+
+/* Same value cells - highlight cells with same number */
+.cell.sameValue {
+  background-color: rgba(227, 190, 231, 0.35);
+  font-weight: 600;
+}
+
+/* Conflicting cells - soft pink (NOT aggressive red) */
+.cell.conflicting {
+  background-color: var(--state-conflicting);
+  color: var(--error-text);
+  animation: gentle-shake 0.3s ease;
+}
+
+@keyframes gentle-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+/* Cell value */
+.value {
+  font-size: clamp(1rem, 4vw, 2rem);
+  line-height: 1;
+}
+
+/* Notes container */
+.notes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1px;
+  width: 100%;
+  height: 100%;
+  padding: 2px;
+  font-size: clamp(0.4rem, 1.2vw, 0.65rem);
+  color: var(--text-secondary);
+}
+
+.note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .cell {
+    font-size: clamp(0.9rem, 5vw, 1.5rem);
+  }
+
+  .value {
+    font-size: clamp(0.9rem, 5vw, 1.5rem);
+  }
+
+  .notes {
+    font-size: clamp(0.35rem, 1.5vw, 0.5rem);
+  }
+}
