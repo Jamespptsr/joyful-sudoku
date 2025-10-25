@@ -134,7 +134,7 @@
   background-color: #ffccbc;
 }
 
-/* Responsive sizing */
+/* Responsive sizing - Width */
 @media (max-width: 600px) {
   .title {
     font-size: 2rem;
@@ -150,5 +150,96 @@
 
   .buttonLabel {
     font-size: 1.25rem;
+  }
+}
+
+/* Responsive sizing - Height (CRITICAL for small screens) */
+@media (max-height: 800px) {
+  .welcome {
+    padding: 16px;
+  }
+
+  .title {
+    font-size: 2.2rem;
+    margin: 0 0 8px 0;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    margin: 0 0 32px 0;
+  }
+
+  .resumeSection {
+    margin-bottom: 24px;
+  }
+
+  .sectionTitle {
+    font-size: 1.3rem;
+    margin: 0 0 16px 0;
+  }
+
+  .difficultyButtons {
+    gap: 12px;
+  }
+
+  .button {
+    padding: 16px 28px;
+    font-size: 1rem;
+  }
+
+  .resumeButton {
+    padding: 12px 40px;
+    font-size: 1.125rem;
+  }
+
+  .buttonLabel {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-height: 700px) {
+  .welcome {
+    padding: 12px;
+  }
+
+  .title {
+    font-size: 1.8rem;
+    margin: 0 0 6px 0;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+    margin: 0 0 24px 0;
+  }
+
+  .resumeSection {
+    margin-bottom: 16px;
+  }
+
+  .sectionTitle {
+    font-size: 1.125rem;
+    margin: 0 0 12px 0;
+  }
+
+  .difficultyButtons {
+    gap: 10px;
+  }
+
+  .button {
+    padding: 12px 24px;
+    font-size: 0.95rem;
+  }
+
+  .resumeButton {
+    padding: 10px 32px;
+    font-size: 1rem;
+  }
+
+  .buttonLabel {
+    font-size: 1.125rem;
+  }
+
+  .buttonDescription {
+    font-size: 0.8rem;
   }
 }

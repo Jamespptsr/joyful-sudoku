@@ -101,7 +101,7 @@
   border-bottom: 2px solid var(--border-box) !important;
 }
 
-/* Responsive sizing */
+/* Responsive sizing - Width */
 @media (max-width: 600px) {
   .grid {
     max-width: 100%;
@@ -124,5 +124,48 @@
   .columnLabel,
   .rowLabel {
     font-size: 0.75rem;
+  }
+}
+
+/* Responsive sizing - Height (CRITICAL for small screens) */
+@media (max-height: 800px) {
+  .gridWithLabels {
+    gap: 6px;
+  }
+
+  .gridRow {
+    gap: 6px;
+  }
+
+  .columnLabel,
+  .rowLabel {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-height: 700px) {
+  .gridWithLabels {
+    gap: 4px;
+  }
+
+  .gridRow {
+    gap: 4px;
+  }
+
+  .columnLabel,
+  .rowLabel {
+    font-size: 0.7rem;
+  }
+
+  .columnLabels {
+    grid-template-columns: 28px repeat(9, 1fr);
+  }
+
+  .cornerSpacer {
+    width: 28px;
+  }
+
+  .rowLabels {
+    width: 28px;
   }
 }

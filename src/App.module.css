@@ -19,6 +19,21 @@
   background: linear-gradient(135deg, var(--primary-light) 0%, white 100%);
 }
 
+/* Responsive for limited height screens */
+@media (max-height: 800px) {
+  .gameContainer {
+    gap: 8px;
+    padding: 12px;
+  }
+}
+
+@media (max-height: 700px) {
+  .gameContainer {
+    gap: 6px;
+    padding: 8px;
+  }
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -29,6 +44,18 @@
   flex-shrink: 0;
 }
 
+@media (max-height: 800px) {
+  .header {
+    gap: 8px;
+  }
+}
+
+@media (max-height: 700px) {
+  .header {
+    gap: 6px;
+  }
+}
+
 .difficultyBadge {
   padding: 6px 16px;
   border-radius: 12px;
@@ -36,6 +63,20 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+}
+
+@media (max-height: 800px) {
+  .difficultyBadge {
+    padding: 4px 12px;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-height: 700px) {
+  .difficultyBadge {
+    padding: 3px 10px;
+    font-size: 0.7rem;
+  }
 }
 
 /* Difficulty-specific colors */
@@ -70,6 +111,20 @@
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-height: 800px) {
+  .button {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-height: 700px) {
+  .button {
+    padding: 5px 10px;
+    font-size: 0.85rem;
+  }
 }
 
 .button:hover:not(:disabled) {
@@ -162,6 +217,12 @@
   margin-bottom: 0;
 }
 
+@media (max-height: 800px) {
+  .numpadContainer {
+    margin-top: 0;
+  }
+}
+
 /* Action buttons container - Secondary controls */
 .actionButtonsContainer {
   display: flex;
@@ -174,11 +235,41 @@
   margin-bottom: 0;
 }
 
+@media (max-height: 800px) {
+  .actionButtonsContainer {
+    margin-top: 10px;
+    gap: 6px;
+  }
+}
+
+@media (max-height: 700px) {
+  .actionButtonsContainer {
+    margin-top: 8px;
+    gap: 6px;
+  }
+}
+
 .actionButton {
   flex: 1;
   padding: 8px 10px;
   font-size: 0.8rem;
   min-height: 36px;
+}
+
+@media (max-height: 800px) {
+  .actionButton {
+    padding: 6px 8px;
+    font-size: 0.75rem;
+    min-height: 32px;
+  }
+}
+
+@media (max-height: 700px) {
+  .actionButton {
+    padding: 5px 7px;
+    font-size: 0.7rem;
+    min-height: 30px;
+  }
 }
 
 .actionButton.active {

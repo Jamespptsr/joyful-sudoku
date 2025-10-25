@@ -91,7 +91,7 @@
   background-color: var(--primary-dark);
 }
 
-/* Responsive sizing */
+/* Responsive sizing - Width */
 @media (max-width: 600px) {
   .celebration {
     font-size: 4rem;
@@ -118,5 +118,86 @@
   .newGameButton {
     font-size: 1.125rem;
     padding: 12px 36px;
+  }
+}
+
+/* Responsive sizing - Height (CRITICAL for small screens) */
+@media (max-height: 800px) {
+  .completion {
+    padding: 16px;
+  }
+
+  .celebration {
+    font-size: 4.5rem;
+    margin-bottom: 16px;
+  }
+
+  .title {
+    font-size: 2.2rem;
+    margin: 0 0 12px 0;
+  }
+
+  .message {
+    font-size: 1.3rem;
+    margin: 0 0 32px 0;
+  }
+
+  .stats {
+    gap: 32px;
+    margin-bottom: 32px;
+    padding: 20px 40px;
+  }
+
+  .statValue {
+    font-size: 1.3rem;
+  }
+
+  .newGameButton {
+    padding: 12px 40px;
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-height: 700px) {
+  .completion {
+    padding: 12px;
+  }
+
+  .celebration {
+    font-size: 3.5rem;
+    margin-bottom: 12px;
+  }
+
+  .title {
+    font-size: 1.8rem;
+    margin: 0 0 8px 0;
+  }
+
+  .message {
+    font-size: 1.1rem;
+    margin: 0 0 24px 0;
+  }
+
+  .stats {
+    gap: 24px;
+    margin-bottom: 24px;
+    padding: 16px 32px;
+  }
+
+  .stat {
+    gap: 4px;
+  }
+
+  .statLabel {
+    font-size: 0.75rem;
+  }
+
+  .statValue {
+    font-size: 1.125rem;
+  }
+
+  .newGameButton {
+    padding: 10px 32px;
+    font-size: 1rem;
   }
 }

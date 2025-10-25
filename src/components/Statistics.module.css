@@ -89,7 +89,7 @@
   font-family: 'Courier New', monospace;
 }
 
-/* Responsive */
+/* Responsive - Width */
 @media (max-width: 600px) {
   .statistics {
     padding: 20px;
@@ -105,5 +105,106 @@
 
   .statLabel {
     font-size: 0.75rem;
+  }
+}
+
+/* Responsive - Height (CRITICAL for small screens) */
+@media (max-height: 800px) {
+  .statistics {
+    padding: 20px;
+    margin-top: 24px;
+  }
+
+  .title {
+    font-size: 1.125rem;
+    margin: 0 0 12px 0;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+    margin: 12px 0 10px 0;
+  }
+
+  .statsGrid {
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .statValue {
+    font-size: 1.6rem;
+  }
+
+  .statLabel {
+    font-size: 0.8rem;
+  }
+
+  .bestTimes {
+    padding-top: 12px;
+  }
+
+  .timesGrid {
+    gap: 6px;
+  }
+
+  .time {
+    padding: 6px 12px;
+  }
+
+  .timeLabel {
+    font-size: 0.8rem;
+  }
+
+  .timeValue {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-height: 700px) {
+  .statistics {
+    padding: 16px;
+    margin-top: 16px;
+  }
+
+  .title {
+    font-size: 1rem;
+    margin: 0 0 10px 0;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+    margin: 10px 0 8px 0;
+  }
+
+  .statsGrid {
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .statValue {
+    font-size: 1.4rem;
+  }
+
+  .statLabel {
+    font-size: 0.75rem;
+  }
+
+  .bestTimes {
+    padding-top: 10px;
+  }
+
+  .timesGrid {
+    gap: 6px;
+  }
+
+  .time {
+    padding: 6px 10px;
+  }
+
+  .timeLabel {
+    font-size: 0.75rem;
+  }
+
+  .timeValue {
+    font-size: 0.9rem;
   }
 }

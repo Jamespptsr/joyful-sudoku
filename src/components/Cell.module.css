@@ -97,7 +97,7 @@
   font-weight: 400;
 }
 
-/* Responsive adjustments */
+/* Responsive adjustments - Width */
 @media (max-width: 600px) {
   .cell {
     font-size: clamp(0.9rem, 5vw, 1.5rem);
@@ -109,5 +109,34 @@
 
   .notes {
     font-size: clamp(0.35rem, 1.5vw, 0.5rem);
+  }
+}
+
+/* Responsive adjustments - Height (CRITICAL for small screens) */
+@media (max-height: 800px) {
+  .cell {
+    font-size: clamp(0.95rem, 3.8vw, 1.8rem);
+  }
+
+  .value {
+    font-size: clamp(0.95rem, 3.8vw, 1.8rem);
+  }
+
+  .notes {
+    font-size: clamp(0.38rem, 1.1vw, 0.6rem);
+  }
+}
+
+@media (max-height: 700px) {
+  .cell {
+    font-size: clamp(0.9rem, 3.5vw, 1.6rem);
+  }
+
+  .value {
+    font-size: clamp(0.9rem, 3.5vw, 1.6rem);
+  }
+
+  .notes {
+    font-size: clamp(0.35rem, 1vw, 0.55rem);
   }
 }

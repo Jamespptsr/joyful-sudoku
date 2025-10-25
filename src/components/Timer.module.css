@@ -39,7 +39,7 @@
   color: var(--text-secondary);
 }
 
-/* Responsive sizing */
+/* Responsive sizing - Width */
 @media (max-width: 600px) {
   .time {
     font-size: 1.2rem;
@@ -48,5 +48,38 @@
 
   .pausedLabel {
     font-size: 0.75rem;
+  }
+}
+
+/* Responsive sizing - Height (CRITICAL for small screens) */
+@media (max-height: 800px) {
+  .timer {
+    padding: 6px 12px;
+    gap: 10px;
+  }
+
+  .time {
+    font-size: 1.3rem;
+    min-width: 65px;
+  }
+
+  .pausedLabel {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-height: 700px) {
+  .timer {
+    padding: 5px 10px;
+    gap: 8px;
+  }
+
+  .time {
+    font-size: 1.1rem;
+    min-width: 60px;
+  }
+
+  .pausedLabel {
+    font-size: 0.7rem;
   }
 }
