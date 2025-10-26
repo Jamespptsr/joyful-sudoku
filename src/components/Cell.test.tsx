@@ -17,6 +17,7 @@ describe('Cell', () => {
         isGiven={false}
         isSelected={false}
         isConflicting={false}
+        isError={false}
         notes={new Set()}
         onClick={onClick}
       />
@@ -35,6 +36,7 @@ describe('Cell', () => {
         isGiven={false}
         isSelected={false}
         isConflicting={false}
+        isError={false}
         notes={new Set()}
         onClick={onClick}
       />
@@ -51,6 +53,7 @@ describe('Cell', () => {
         isGiven={false}
         isSelected={true}
         isConflicting={false}
+        isError={false}
         notes={new Set()}
         onClick={onClick}
       />
@@ -67,6 +70,7 @@ describe('Cell', () => {
         isGiven={true}
         isSelected={false}
         isConflicting={false}
+        isError={false}
         notes={new Set()}
         onClick={onClick}
       />
@@ -83,6 +87,7 @@ describe('Cell', () => {
         isGiven={false}
         isSelected={false}
         isConflicting={true}
+        isError={false}
         notes={new Set()}
         onClick={onClick}
       />
@@ -99,6 +104,7 @@ describe('Cell', () => {
         isGiven={false}
         isSelected={false}
         isConflicting={false}
+        isError={false}
         notes={new Set([1, 2, 3])}
         onClick={onClick}
       />
@@ -117,6 +123,7 @@ describe('Cell', () => {
         isGiven={false}
         isSelected={false}
         isConflicting={false}
+        isError={false}
         notes={new Set([1, 2, 3])}
         onClick={onClick}
       />
@@ -134,6 +141,7 @@ describe('Cell', () => {
         isGiven={false}
         isSelected={false}
         isConflicting={false}
+        isError={false}
         notes={new Set()}
         onClick={onClick}
       />
@@ -152,6 +160,7 @@ describe('Cell', () => {
         isGiven={true}
         isSelected={false}
         isConflicting={false}
+        isError={false}
         notes={new Set()}
         onClick={onClick}
       />

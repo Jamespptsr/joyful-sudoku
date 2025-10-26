@@ -5,23 +5,37 @@
 
 /* Container for grid + labels */
 .gridWithLabels {
+  --label-width: 32px;
+  --grid-gap: 8px;
+
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--grid-gap);
   width: 100%;
   max-width: 100%;
+  min-width: 0;
 }
 
 /* Top row with column numbers 1-9 */
 .columnLabels {
-  display: grid;
-  grid-template-columns: 32px repeat(9, 1fr);
+  display: flex;
+  align-items: center;
+  gap: var(--grid-gap);
   width: 100%;
-  gap: 0;
+  min-width: 0;
 }
 
 .cornerSpacer {
-  width: 32px;
+  width: var(--label-width);
+  flex: 0 0 var(--label-width);
+}
+
+.columnNumbers {
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  gap: 0;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .columnLabel {
@@ -36,41 +50,60 @@
 /* Grid row (labels + grid side by side) */
 .gridRow {
   display: flex;
-  gap: 8px;
+  gap: var(--grid-gap);
+  width: 100%;
+  min-width: 0;
+  align-items: stretch;
 }
 
 /* Left column with row letters A-I */
 .rowLabels {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 32px;
+  display: grid;
+  grid-template-rows: repeat(9, minmax(0, 1fr));
+  justify-items: center;
+  align-items: center;
+  width: var(--label-width);
+  flex: 0 0 var(--label-width);
+  min-width: 0;
 }
 
 .rowLabel {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  width: 100%;
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--text-secondary);
 }
 
+.boardContainer {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.boardContainer::before {
+  content: '';
+  display: block;
+  width: 100%;
+  padding-bottom: 100%;
+}
+
 /* The actual sudoku grid */
 .grid {
+  position: absolute;
+  inset: 0;
   display: grid;
   grid-template-columns: repeat(9, 1fr);
   grid-template-rows: repeat(9, 1fr);
   gap: 0;
-  width: 100%;
-  aspect-ratio: 1 / 1;
+  box-sizing: border-box;
   background-color: white;
   border: 2px solid var(--border-box);
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  position: relative;
 }
 
 /* Add top and left borders for first row/column cells */
@@ -103,69 +136,70 @@
 
 /* Responsive sizing - Width */
 @media (max-width: 600px) {
+  .gridWithLabels {
+    --label-width: 24px;
+  }
+
   .grid {
     max-width: 100%;
     border-radius: 4px;
   }
 
-  .columnLabels {
-    grid-template-columns: 24px repeat(9, 1fr);
-    max-width: calc(100% + 24px + 8px);
-  }
-
-  .cornerSpacer {
-    width: 24px;
-  }
-
-  .rowLabels {
-    width: 24px;
-  }
-
   .columnLabel,
   .rowLabel {
     font-size: 0.75rem;
   }
 }
 
-/* Responsive sizing - Height (CRITICAL for small screens) */
-@media (max-height: 800px) {
+/* CRITICAL: Very narrow screens - reduce all spacing */
+@media (max-width: 480px) {
   .gridWithLabels {
-    gap: 6px;
+    --label-width: 16px;
+    --grid-gap: 3px;
   }
 
-  .gridRow {
-    gap: 6px;
+  .grid {
+    border-width: 1px;
+    border-radius: 3px;
+  }
+
+  .columnLabel,
+  .rowLabel {
+    font-size: 0.6rem;
+  }
+
+  /* Thinner box borders on narrow screens */
+  .boxRight {
+    border-right-width: 1px !important;
+  }
+
+  .boxBottom {
+    border-bottom-width: 1px !important;
+  }
+}
+
+/* Extra narrow screens */
+@media (max-width: 380px) {
+  .gridWithLabels {
+    --label-width: 12px;
+    --grid-gap: 2px;
+  }
+
+  .columnLabel,
+  .rowLabel {
+    font-size: 0.55rem;
+  }
+}
+
+/* Responsive sizing - Height (ONLY for very small screens) */
+@media (max-height: 650px) {
+  .gridWithLabels {
+    --label-width: 28px;
+    --grid-gap: 6px;
   }
 
   .columnLabel,
   .rowLabel {
     font-size: 0.75rem;
-  }
-}
-
-@media (max-height: 700px) {
-  .gridWithLabels {
-    gap: 4px;
-  }
-
-  .gridRow {
-    gap: 4px;
-  }
-
-  .columnLabel,
-  .rowLabel {
-    font-size: 0.7rem;
-  }
-
-  .columnLabels {
-    grid-template-columns: 28px repeat(9, 1fr);
-  }
-
-  .cornerSpacer {
-    width: 28px;
-  }
-
-  .rowLabels {
-    width: 28px;
   }
 }

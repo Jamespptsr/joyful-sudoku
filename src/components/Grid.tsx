@@ -33,12 +33,14 @@ const Grid: React.FC<GridProps> = ({ grid, selectedCell, onCellClick }) => {
     <div className={styles.gridWithLabels}>
       {/* Top row with column numbers */}
       <div className={styles.columnLabels}>
-        <div className={styles.cornerSpacer} /> {/* Empty corner */}
-        {columnLabels.map((label, index) => (
-          <div key={`col-${index}`} className={styles.columnLabel}>
-            {label}
-          </div>
-        ))}
+        <div className={styles.cornerSpacer} aria-hidden="true" />
+        <div className={styles.columnNumbers}>
+          {columnLabels.map((label, index) => (
+            <div key={`col-${index}`} className={styles.columnLabel}>
+              {label}
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className={styles.gridRow}>
@@ -52,64 +54,67 @@ const Grid: React.FC<GridProps> = ({ grid, selectedCell, onCellClick }) => {
         </div>
 
         {/* The actual grid */}
-        <div className={styles.grid}>
-      {grid.map((row, rowIndex) =>
-        row.map((cell, colIndex) => {
-          const isSelected =
-            selectedCell?.row === rowIndex && selectedCell?.col === colIndex;
+        <div className={styles.boardContainer}>
+          <div className={styles.grid}>
+            {grid.map((row, rowIndex) =>
+              row.map((cell, colIndex) => {
+                const isSelected =
+                  selectedCell?.row === rowIndex && selectedCell?.col === colIndex;
 
-          // Determine if cell is in same row/col/box as selected cell
-          const currentBox = Math.floor(rowIndex / 3) * 3 + Math.floor(colIndex / 3);
-          const isRelated =
-            selectedCell &&
-            !isSelected &&
-            (selectedCell.row === rowIndex ||
-              selectedCell.col === colIndex ||
-              selectedBox === currentBox);
+                // Determine if cell is in same row/col/box as selected cell
+                const currentBox = Math.floor(rowIndex / 3) * 3 + Math.floor(colIndex / 3);
+                const isRelated =
+                  selectedCell &&
+                  !isSelected &&
+                  (selectedCell.row === rowIndex ||
+                    selectedCell.col === colIndex ||
+                    selectedBox === currentBox);
 
-          // Determine if cell has same value as selected cell
-          const isSameValue =
-            selectedValue !== null &&
-            cell.value === selectedValue &&
-            !isSelected;
+                // Determine if cell has same value as selected cell
+                const isSameValue =
+                  selectedValue !== null &&
+                  cell.value === selectedValue &&
+                  !isSelected;
 
-          // Determine box border classes
-          const isBoxRight = colIndex === 2 || colIndex === 5;
-          const isBoxBottom = rowIndex === 2 || rowIndex === 5;
+                // Determine box border classes
+                const isBoxRight = colIndex === 2 || colIndex === 5;
+                const isBoxBottom = rowIndex === 2 || rowIndex === 5;
 
-          const cellClasses = [
-            styles.gridCell,
-            isBoxRight && styles.boxRight,
-            isBoxBottom && styles.boxBottom,
-          ]
-            .filter(Boolean)
-            .join(' ');
+                const cellClasses = [
+                  styles.gridCell,
+                  isBoxRight && styles.boxRight,
+                  isBoxBottom && styles.boxBottom,
+                ]
+                  .filter(Boolean)
+                  .join(' ');
 
-          return (
-            <div key={`${rowIndex}-${colIndex}`} className={cellClasses}>
-              <div
-                data-testid={`cell-${rowIndex}-${colIndex}`}
-                className={`${isSelected ? 'selected' : ''} ${
-                  cell.isGiven ? 'given' : ''
-                } ${cell.isConflicting ? 'conflicting' : ''} ${
-                  isBoxRight ? 'box-right' : ''
-                } ${isBoxBottom ? 'box-bottom' : ''}`}
-              >
-                <Cell
-                  value={cell.value}
-                  isGiven={cell.isGiven}
-                  isSelected={isSelected}
-                  isRelated={isRelated || false}
-                  isSameValue={isSameValue || false}
-                  isConflicting={cell.isConflicting}
-                  notes={cell.notes}
-                  onClick={() => onCellClick(rowIndex, colIndex)}
-                />
-              </div>
-            </div>
-          );
-        })
-      )}
+                return (
+                  <div key={`${rowIndex}-${colIndex}`} className={cellClasses}>
+                    <div
+                      data-testid={`cell-${rowIndex}-${colIndex}`}
+                      className={`${isSelected ? 'selected' : ''} ${
+                        cell.isGiven ? 'given' : ''
+                      } ${cell.isConflicting ? 'conflicting' : ''} ${
+                        isBoxRight ? 'box-right' : ''
+                      } ${isBoxBottom ? 'box-bottom' : ''}`}
+                    >
+                      <Cell
+                        value={cell.value}
+                        isGiven={cell.isGiven}
+                        isSelected={isSelected}
+                        isRelated={isRelated || false}
+                        isSameValue={isSameValue || false}
+                        isConflicting={cell.isConflicting}
+                        isError={cell.isError}
+                        notes={cell.notes}
+                        onClick={() => onCellClick(rowIndex, colIndex)}
+                      />
+                    </div>
+                  </div>
+                );
+              })
+            )}
+          </div>
         </div>
       </div>
     </div>

@@ -108,38 +108,38 @@
   }
 }
 
-/* Responsive - Height (CRITICAL for small screens) */
-@media (max-height: 800px) {
+/* Responsive - Height (ONLY for very small screens) */
+@media (max-height: 650px) {
   .statistics {
-    padding: 20px;
-    margin-top: 24px;
+    padding: 18px;
+    margin-top: 20px;
   }
 
   .title {
-    font-size: 1.125rem;
-    margin: 0 0 12px 0;
+    font-size: 1.1rem;
+    margin: 0 0 11px 0;
   }
 
   .subtitle {
-    font-size: 0.95rem;
-    margin: 12px 0 10px 0;
+    font-size: 0.93rem;
+    margin: 11px 0 9px 0;
   }
 
   .statsGrid {
-    gap: 12px;
-    margin-bottom: 12px;
+    gap: 11px;
+    margin-bottom: 11px;
   }
 
   .statValue {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
 
   .statLabel {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
   }
 
   .bestTimes {
-    padding-top: 12px;
+    padding-top: 11px;
   }
 
   .timesGrid {
@@ -147,64 +147,14 @@
   }
 
   .time {
-    padding: 6px 12px;
+    padding: 6px 11px;
   }
 
   .timeLabel {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
   }
 
   .timeValue {
-    font-size: 0.95rem;
-  }
-}
-
-@media (max-height: 700px) {
-  .statistics {
-    padding: 16px;
-    margin-top: 16px;
-  }
-
-  .title {
-    font-size: 1rem;
-    margin: 0 0 10px 0;
-  }
-
-  .subtitle {
-    font-size: 0.9rem;
-    margin: 10px 0 8px 0;
-  }
-
-  .statsGrid {
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-
-  .statValue {
-    font-size: 1.4rem;
-  }
-
-  .statLabel {
-    font-size: 0.75rem;
-  }
-
-  .bestTimes {
-    padding-top: 10px;
-  }
-
-  .timesGrid {
-    gap: 6px;
-  }
-
-  .time {
-    padding: 6px 10px;
-  }
-
-  .timeLabel {
-    font-size: 0.75rem;
-  }
-
-  .timeValue {
-    font-size: 0.9rem;
+    font-size: 0.93rem;
   }
 }

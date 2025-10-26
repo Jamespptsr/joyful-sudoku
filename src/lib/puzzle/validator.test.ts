@@ -9,6 +9,7 @@ describe('Puzzle Validator', () => {
     isGiven,
     notes: new Set(),
     isConflicting: false,
+    isError: false,
     row,
     col,
     box: Math.floor(row / 3) * 3 + Math.floor(col / 3)

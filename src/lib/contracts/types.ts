@@ -46,6 +46,9 @@ export interface Cell {
   /** Whether cell violates Sudoku rules (computed from validation) */
   isConflicting: boolean;
 
+  /** Whether cell value doesn't match the solution (instant error feedback) */
+  isError: boolean;
+
   /** Row index (0-8) */
   row: number;
 

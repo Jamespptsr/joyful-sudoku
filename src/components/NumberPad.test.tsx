@@ -17,6 +17,7 @@ const createEmptyGrid = (): Grid => {
       isGiven: false,
       notes: new Set<number>(),
       isConflicting: false,
+      isError: false,
       row,
       col,
       box: Math.floor(row / 3) * 3 + Math.floor(col / 3),

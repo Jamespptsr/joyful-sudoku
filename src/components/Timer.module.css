@@ -51,35 +51,19 @@
   }
 }
 
-/* Responsive sizing - Height (CRITICAL for small screens) */
-@media (max-height: 800px) {
+/* Responsive sizing - Height (ONLY for very small screens) */
+@media (max-height: 650px) {
   .timer {
     padding: 6px 12px;
     gap: 10px;
   }
 
   .time {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     min-width: 65px;
   }
 
   .pausedLabel {
-    font-size: 0.8rem;
-  }
-}
-
-@media (max-height: 700px) {
-  .timer {
-    padding: 5px 10px;
-    gap: 8px;
-  }
-
-  .time {
-    font-size: 1.1rem;
-    min-width: 60px;
-  }
-
-  .pausedLabel {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
   }
 }

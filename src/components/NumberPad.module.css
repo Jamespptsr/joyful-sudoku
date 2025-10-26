@@ -7,10 +7,9 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 8px;
-  width: calc(100% - 40px);
-  max-width: calc(100% - 40px);
+  width: 100%;
+  max-width: 100%;
   margin: 0;
-  margin-left: 40px;
   padding: 0;
 }
 
@@ -96,10 +95,32 @@
 /* Responsive sizing - Width */
 @media (max-width: 600px) {
   .numberPad {
+    gap: 8px;
+  }
+
+  .numberButton {
+    padding: 4px;
+    min-height: 48px;
+    max-height: 60px;
+  }
+
+  .number {
+    font-size: clamp(1rem, 3.5vw, 1.4rem);
+  }
+
+  .counter {
+    font-size: clamp(0.6rem, 1.8vw, 0.75rem);
+  }
+
+  .eraseButton {
+    font-size: clamp(1rem, 3.5vw, 1.4rem);
+  }
+}
+
+/* Responsive sizing - Height (ONLY for very small screens) */
+@media (max-height: 650px) {
+  .numberPad {
     gap: 6px;
-    width: calc(100% - 32px);
-    max-width: calc(100% - 32px);
-    margin-left: 32px;
   }
 
   .numberButton {
@@ -109,55 +130,10 @@
   }
 
   .number {
-    font-size: clamp(0.9rem, 3.2vw, 1.2rem);
+    font-size: clamp(0.9rem, 3vw, 1.2rem);
   }
 
   .counter {
-    font-size: clamp(0.5rem, 1.6vw, 0.65rem);
-  }
-
-  .eraseButton {
-    font-size: clamp(0.9rem, 3.2vw, 1.2rem);
-  }
-}
-
-/* Responsive sizing - Height (CRITICAL for small screens) */
-@media (max-height: 800px) {
-  .numberPad {
-    gap: 6px;
-  }
-
-  .numberButton {
-    padding: 3px;
-    min-height: 38px;
-    max-height: 48px;
-  }
-
-  .number {
-    font-size: clamp(0.9rem, 2vw, 1.2rem);
-  }
-
-  .counter {
-    font-size: clamp(0.5rem, 0.9vw, 0.65rem);
-  }
-}
-
-@media (max-height: 700px) {
-  .numberPad {
-    gap: 5px;
-  }
-
-  .numberButton {
-    padding: 2px;
-    min-height: 35px;
-    max-height: 42px;
-  }
-
-  .number {
-    font-size: clamp(0.85rem, 1.8vw, 1.1rem);
-  }
-
-  .counter {
-    font-size: clamp(0.45rem, 0.85vw, 0.6rem);
+    font-size: clamp(0.55rem, 1.5vw, 0.7rem);
   }
 }

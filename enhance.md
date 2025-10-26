@@ -1,35 +1,54 @@
-### **Summary of App Status & Required Enhancements for Sudoku Game**
+**Description:**
+Hello, the Sudoku application is nearly complete, but we need to implement two crucial bug fixes to enhance the core gameplay loop. Both require adding real-time validation and state updates.
 
-This document outlines the consensus on the current state of the Sudoku application, detailing missing features, UI/UX improvements, and technical issues that need to be addressed to match the target design and functionality.
+---
 
-**1. Confirmed Missing Features & UI Elements**
+### **Bug 1: Auto-Updating Pencil Notes (Real-Time Pruning)**
 
-The following items have been identified as missing and need to be implemented:
+**Problem:**
+The "Notes" a user adds to a cell are currently static. They do not automatically update or get removed when a conflicting number is placed in the same row, column, or 3x3 box. This forces the user to manually clean up their own notes, which is not ideal.
 
-*   **Functional Deficiencies:**
-    *   **Error Counter:** The app lacks the "Mistakes: 0/3" feedback mechanism seen in the original design.
-    *   **Scoring System:** There is no score display or calculation, which is a key feature for user accomplishment.
-    *   **Difficulty Level Indicator:** The UI does not show the current difficulty level (e.g., "Medium").
-    *   **Row and Column Identifiers:** The grid is missing the top (1-9) and side (A-I) coordinate labels that help with cell location and communication.
-    *   **Share Functionality:** A "Share" button is missing.
+**Expected Behavior:**
+When a user successfully places a final number (e.g., a "7") in a cell, the application should immediately and automatically scan all "peer" cells (cells in the same row, same column, and same 3x3 box) and remove the note "7" from any of them.
 
-*   **UI/UX Deficiencies:**
-    *   **Selected Cell Highlighting (High Priority):** There is no clear visual indicator (e.g., a colored background) to show which cell is currently active or selected for input. This is critical for usability.
-    *   **Lack of Number Styling Differentiation:** The app does not visually distinguish between the initial puzzle numbers ("givens") and the numbers entered by the player.
-    *   **Missing Helper Info on Numpad:** The number pad lacks a visual counter to indicate how many of each digit have already been placed on the board.
-    *   **Incomplete Top Information Bar:** The top bar is minimalistic, showing only the timer. It needs to be expanded to include other key game stats like Score, Difficulty, and the Error Counter for a complete status overview.
+**Implementation Guide:**
 
-**2. Features Confirmed as Implemented**
+1.  **Trigger the Logic:** This logic should be triggered *after* a user places a definitive number into a cell (not when they are adding notes).
+2.  **Create a Helper Function:** It's best to create a function like `updatePeerNotes(grid, updatedRow, updatedCol, placedNumber)`.
+3.  **Function Logic:**
+    *   Iterate through all 9 cells of the `updatedRow` and remove `placedNumber` from their notes array.
+    *   Iterate through all 9 cells of the `updatedCol` and remove `placedNumber` from their notes array.
+    *   Iterate through all 9 cells of the corresponding 3x3 box and remove `placedNumber` from their notes array.
+4.  **Update State:** This function should modify the main grid state, which will cause the affected cells to re-render with the updated, cleaner notes.
 
-We have clarified that the following features are already implemented in the current build, even if not fully depicted in the screenshot:
+---
 
-*   **Erase Functionality**
-*   **Notes (Pencil Marks) Functionality**
+### **Bug 2: Instant Error Validation on Number Input**
 
-**3. Technical & Visual Issues to Be Resolved**
+**Problem:**
+The game is generated with a single, correct solution, but the application currently accepts any number the user inputs without providing immediate feedback. The user can fill the whole board with incorrect numbers and only find out at the end.
 
-A specific rendering issue has been identified and needs to be fixed:
+**Expected Behavior:**
+When a user inputs a number into a cell that does not match the correct, pre-generated solution for that specific cell, the number should be immediately and visually marked as an error. A common way to do this is to change the number's color to red.
 
-*   **Issue Description:** A visual artifact exists where thick purple lines appear at the borders where colored cells meet other cells or grid lines.
-*   **Probable Cause:** This is a common CSS rendering issue caused by **border collapse** or **overlapping borders**. Adjacent cells or elements are each rendering a border, which combine to appear as one thicker line.
-*   **Recommended Solution:** Refactor the grid's CSS to prevent border overlap. The standard approach is to apply borders to only two sides of each cell (e.g., `border-right` and `border-bottom`) and use the main grid container to apply the top and left-most borders. This ensures that no two borders are ever drawn in the same location.
+**Implementation Guide:**
+
+1.  **Prerequisite (State Management):** The application's state must contain two separate grids:
+    *   `solutionGrid`: The complete, correct solution for the current puzzle.
+    *   `userGrid`: The grid that the user is currently filling, which includes their input numbers and notes.
+
+2.  **Modify the Input Handler:** The function that processes a user's input (e.g., `handleNumberInput(row, col, number)`) needs to be modified.
+3.  **Add Validation Logic:** Inside this function, after placing the number in the `userGrid`, add this check:
+    ```javascript
+    const isError = number !== solutionGrid[row][col];
+    ```
+4.  **Update Cell State:** The state for the cell in `userGrid` should be updated to include this error status. For example:
+    `userGrid[row][col].value = number;`
+    `userGrid[row][col].isError = isError;`
+5.  **Conditional Styling (CSS/UI):** The `Cell` component must be updated to reflect this `isError` state. It should conditionally apply an "error" class if `cell.isError` is true.
+    ```css
+    .cell.error .number {
+      color: red;
+    }
+    ```
+6.  **Clearing the Error:** Ensure that when a user erases a number from a cell, the `isError` flag is also reset to `false`.

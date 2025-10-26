@@ -5,7 +5,6 @@
 
 .cell {
   width: 100%;
-  height: 100%;
   aspect-ratio: 1;
   border: none;
   border-right: 1px solid var(--border-default);
@@ -65,6 +64,12 @@
   animation: gentle-shake 0.3s ease;
 }
 
+/* Error cells - incorrect value (doesn't match solution) */
+.cell.error .value {
+  color: #e53e3e;
+  font-weight: 600;
+}
+
 @keyframes gentle-shake {
   0%, 100% { transform: translateX(0); }
   25% { transform: translateX(-2px); }
@@ -100,43 +105,72 @@
 /* Responsive adjustments - Width */
 @media (max-width: 600px) {
   .cell {
-    font-size: clamp(0.9rem, 5vw, 1.5rem);
+    font-size: clamp(0.7rem, 5vw, 1.5rem);
   }
 
   .value {
-    font-size: clamp(0.9rem, 5vw, 1.5rem);
+    font-size: clamp(0.7rem, 5vw, 1.5rem);
   }
 
   .notes {
-    font-size: clamp(0.35rem, 1.5vw, 0.5rem);
+    font-size: clamp(0.3rem, 1.5vw, 0.5rem);
   }
 }
 
-/* Responsive adjustments - Height (CRITICAL for small screens) */
-@media (max-height: 800px) {
+/* CRITICAL: Fix for very narrow screens (prevent grid cutoff) */
+@media (max-width: 480px) {
   .cell {
-    font-size: clamp(0.95rem, 3.8vw, 1.8rem);
+    /* Use pure vw units - no minimum constraint */
+    font-size: 4vw;
+    padding: 0;
   }
 
   .value {
-    font-size: clamp(0.95rem, 3.8vw, 1.8rem);
+    font-size: 4vw;
   }
 
   .notes {
-    font-size: clamp(0.38rem, 1.1vw, 0.6rem);
+    font-size: 1.3vw;
+    padding: 1px;
+    gap: 0;
+  }
+
+  .note {
+    font-size: 1.3vw;
   }
 }
 
-@media (max-height: 700px) {
+/* Extra narrow screens - make even more compact */
+@media (max-width: 380px) {
   .cell {
-    font-size: clamp(0.9rem, 3.5vw, 1.6rem);
+    font-size: 3.8vw;
   }
 
   .value {
-    font-size: clamp(0.9rem, 3.5vw, 1.6rem);
+    font-size: 3.8vw;
   }
 
   .notes {
-    font-size: clamp(0.35rem, 1vw, 0.55rem);
+    font-size: 1.2vw;
+    padding: 0;
+  }
+
+  .note {
+    font-size: 1.2vw;
+  }
+}
+
+/* Responsive adjustments - Height (ONLY for very small screens) */
+@media (max-height: 650px) {
+  .cell {
+    font-size: clamp(0.92rem, 3.6vw, 1.7rem);
+  }
+
+  .value {
+    font-size: clamp(0.92rem, 3.6vw, 1.7rem);
+  }
+
+  .notes {
+    font-size: clamp(0.36rem, 1.05vw, 0.57rem);
   }
 }

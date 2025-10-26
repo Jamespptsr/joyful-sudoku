@@ -4,7 +4,7 @@
  */
 
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Grid from './Grid';
 import type { Cell } from '../lib/contracts/types';
@@ -20,6 +20,7 @@ function createTestGrid(): Cell[][] {
         isGiven: false,
         notes: new Set(),
         isConflicting: false,
+        isError: false,
         row,
         col,
         box: Math.floor(row / 3) * 3 + Math.floor(col / 3),
@@ -100,7 +101,10 @@ describe('Grid', () => {
 
     render(<Grid grid={grid} selectedCell={null} onCellClick={onCellClick} />);
 
-    await user.click(screen.getByTestId('cell-2-3'));
+    const cell = screen.getByTestId('cell-2-3');
+    const cellButton = within(cell).getByRole('button');
+
+    await user.click(cellButton);
 
     expect(onCellClick).toHaveBeenCalledWith(2, 3);
   });

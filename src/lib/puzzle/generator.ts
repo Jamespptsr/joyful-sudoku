@@ -132,6 +132,7 @@ function createGridFromSolution(solution: SolutionGrid): Cell[][] {
         isGiven: true, // Initially all cells are given
         notes: new Set(),
         isConflicting: false,
+        isError: false, // Initially no errors
         row,
         col,
         box: Math.floor(row / BOX_SIZE) * BOX_SIZE + Math.floor(col / BOX_SIZE)

@@ -13,6 +13,7 @@ interface CellProps {
   isRelated?: boolean;
   isSameValue?: boolean;
   isConflicting: boolean;
+  isError: boolean;
   notes: Set<number>;
   onClick: () => void;
 }
@@ -24,6 +25,7 @@ const Cell: React.FC<CellProps> = ({
   isRelated = false,
   isSameValue = false,
   isConflicting,
+  isError,
   notes,
   onClick,
 }) => {
@@ -32,6 +34,7 @@ const Cell: React.FC<CellProps> = ({
     isSelected && styles.selected,
     isGiven && styles.given,
     isConflicting && styles.conflicting,
+    isError && styles.error,
     isRelated && styles.related,
     isSameValue && styles.sameValue,
   ]

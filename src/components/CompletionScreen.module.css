@@ -121,83 +121,47 @@
   }
 }
 
-/* Responsive sizing - Height (CRITICAL for small screens) */
-@media (max-height: 800px) {
+/* Responsive sizing - Height (ONLY for very small screens) */
+@media (max-height: 650px) {
   .completion {
-    padding: 16px;
+    padding: 14px;
   }
 
   .celebration {
-    font-size: 4.5rem;
-    margin-bottom: 16px;
+    font-size: 4rem;
+    margin-bottom: 14px;
   }
 
   .title {
-    font-size: 2.2rem;
-    margin: 0 0 12px 0;
+    font-size: 2rem;
+    margin: 0 0 10px 0;
   }
 
   .message {
-    font-size: 1.3rem;
-    margin: 0 0 32px 0;
+    font-size: 1.2rem;
+    margin: 0 0 28px 0;
   }
 
   .stats {
-    gap: 32px;
-    margin-bottom: 32px;
-    padding: 20px 40px;
-  }
-
-  .statValue {
-    font-size: 1.3rem;
-  }
-
-  .newGameButton {
-    padding: 12px 40px;
-    font-size: 1.125rem;
-  }
-}
-
-@media (max-height: 700px) {
-  .completion {
-    padding: 12px;
-  }
-
-  .celebration {
-    font-size: 3.5rem;
-    margin-bottom: 12px;
-  }
-
-  .title {
-    font-size: 1.8rem;
-    margin: 0 0 8px 0;
-  }
-
-  .message {
-    font-size: 1.1rem;
-    margin: 0 0 24px 0;
-  }
-
-  .stats {
-    gap: 24px;
-    margin-bottom: 24px;
-    padding: 16px 32px;
+    gap: 28px;
+    margin-bottom: 28px;
+    padding: 18px 36px;
   }
 
   .stat {
-    gap: 4px;
+    gap: 6px;
   }
 
   .statLabel {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
   }
 
   .statValue {
-    font-size: 1.125rem;
+    font-size: 1.2rem;
   }
 
   .newGameButton {
-    padding: 10px 32px;
-    font-size: 1rem;
+    padding: 11px 36px;
+    font-size: 1.05rem;
   }
 }

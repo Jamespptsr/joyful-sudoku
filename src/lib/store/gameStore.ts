@@ -121,6 +121,35 @@ function updateAllConflicts(grid: Cell[][]): void {
   }
 }
 
+/**
+ * Update peer notes by removing a placed number from all cells in same row, column, and box
+ */
+function updatePeerNotes(grid: Cell[][], row: number, col: number, placedNumber: number): void {
+  for (let i = 0; i < 9; i++) {
+    // Remove from same row
+    if (i !== col && grid[row][i].notes.has(placedNumber)) {
+      grid[row][i].notes.delete(placedNumber);
+    }
+
+    // Remove from same column
+    if (i !== row && grid[i][col].notes.has(placedNumber)) {
+      grid[i][col].notes.delete(placedNumber);
+    }
+  }
+
+  // Remove from same 3x3 box
+  const boxStartRow = Math.floor(row / 3) * 3;
+  const boxStartCol = Math.floor(col / 3) * 3;
+
+  for (let r = boxStartRow; r < boxStartRow + 3; r++) {
+    for (let c = boxStartCol; c < boxStartCol + 3; c++) {
+      if ((r !== row || c !== col) && grid[r][c].notes.has(placedNumber)) {
+        grid[r][c].notes.delete(placedNumber);
+      }
+    }
+  }
+}
+
 export const useGameStore = create<GameState>((set, get) => ({
   session: null,
   timerIntervalId: null,
@@ -239,15 +268,23 @@ export const useGameStore = create<GameState>((set, get) => ({
     const newGrid = session.currentGrid.map((r, rowIdx) =>
       r.map((c, colIdx) => {
         if (rowIdx === row && colIdx === col) {
+          // Validate against solution
+          const isError = value !== null && value !== session.puzzle.solution[row][col];
           return {
             ...c,
             value,
             notes: new Set<number>(), // Clear notes when setting value
+            isError, // Set error flag if value doesn't match solution
           };
         }
         return { ...c };
       })
     );
+
+    // Update peer notes (remove placed number from peer cells' notes)
+    if (value !== null) {
+      updatePeerNotes(newGrid, row, col, value);
+    }
 
     // Update conflicts
     updateAllConflicts(newGrid);
@@ -369,10 +406,13 @@ export const useGameStore = create<GameState>((set, get) => ({
       r.map((c, colIdx) => {
         if (rowIdx === row && colIdx === col) {
           if (action.type === 'ENTER_NUMBER') {
+            const prevValue = action.previousValue ?? null;
+            const isError = prevValue !== null && prevValue !== session.puzzle.solution[row][col];
             return {
               ...c,
-              value: action.previousValue ?? null,
+              value: prevValue,
               notes: new Set(action.previousNotes || []),
+              isError,
             };
           } else if (action.type === 'TOGGLE_NOTE') {
             return {
@@ -413,10 +453,13 @@ export const useGameStore = create<GameState>((set, get) => ({
       r.map((c, colIdx) => {
         if (rowIdx === row && colIdx === col) {
           if (action.type === 'ENTER_NUMBER') {
+            const redoValue = action.newValue ?? null;
+            const isError = redoValue !== null && redoValue !== session.puzzle.solution[row][col];
             return {
               ...c,
-              value: action.newValue ?? null,
+              value: redoValue,
               notes: new Set<number>(),
+              isError,
             };
           } else if (action.type === 'TOGGLE_NOTE') {
             return {
