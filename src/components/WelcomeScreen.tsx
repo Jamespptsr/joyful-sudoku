@@ -19,7 +19,7 @@ const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
 }) => {
   return (
     <div className={styles.welcome}>
-      <h1 className={styles.title}>Joyful Sudoku for my soulmate TAT</h1>
+      <h1 className={styles.title}>Joyful Sudoku</h1>
       <p className={styles.subtitle}>
         Choose your difficulty and enjoy a stress-free puzzle experience
       </p>
