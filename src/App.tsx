@@ -120,95 +120,99 @@ const App: React.FC = () => {
 
         return (
           <div className={styles.gameContainer}>
-            {/* Header */}
-            <div className={styles.header}>
-              <Timer elapsedSeconds={session.elapsedTime} isPaused={session.isPaused} />
+            <div className={styles.gameShell}>
+              {/* Header */}
+              <div className={styles.header}>
+                <Timer elapsedSeconds={session.elapsedTime} isPaused={session.isPaused} />
 
-              <div className={`${styles.difficultyBadge} ${styles[session.puzzle.difficulty]}`}>
-                {session.puzzle.difficulty.charAt(0).toUpperCase() + session.puzzle.difficulty.slice(1)}
-              </div>
-
-              <div className={styles.headerButtons}>
-                <button
-                  className={styles.button}
-                  onClick={handlePauseToggle}
-                  aria-label={session.isPaused ? 'Resume' : 'Pause'}
-                >
-                  {session.isPaused ? '▶' : '⏸'}
-                </button>
-
-                <button
-                  className={styles.button}
-                  onClick={() => {
-                    if (confirm('Are you sure you want to quit? Your progress will be saved.')) {
-                      setCurrentScreen('welcome');
-                    }
-                  }}
-                  aria-label="Quit"
-                >
-                  ✕
-                </button>
-              </div>
-            </div>
-
-            {/* Grid */}
-            <div className={`${styles.gridContainer} ${session.isPaused ? styles.paused : ''}`}>
-              <Grid
-                grid={session.currentGrid}
-                selectedCell={session.selectedCell}
-                onCellClick={selectCell}
-              />
-              {session.isPaused && (
-                <div className={styles.pausedOverlay}>
-                  <div className={styles.pausedMessage}>
-                    <p>Paused</p>
-                    <button className={styles.resumeButton} onClick={resumeTimer}>
-                      ▶ Resume
-                    </button>
-                  </div>
+                <div className={`${styles.difficultyBadge} ${styles[session.puzzle.difficulty]}`}>
+                  {session.puzzle.difficulty.charAt(0).toUpperCase() + session.puzzle.difficulty.slice(1)}
                 </div>
-              )}
-            </div>
 
-            {/* Numpad - Primary gameplay controls */}
-            <div className={styles.numpadContainer}>
-              <NumberPad
-                grid={session.currentGrid}
-                onNumberClick={handleNumberClick}
-                onEraseClick={handleErase}
-                disabled={session.selectedCell === null || session.isPaused}
-              />
-            </div>
+                <div className={styles.headerButtons}>
+                  <button
+                    className={styles.button}
+                    onClick={handlePauseToggle}
+                    aria-label={session.isPaused ? 'Resume' : 'Pause'}
+                  >
+                    {session.isPaused ? '▶' : '⏸'}
+                  </button>
 
-            {/* Action Buttons - Secondary controls */}
-            <div className={styles.actionButtonsContainer}>
-              <button
-                className={`${styles.button} ${styles.actionButton}`}
-                onClick={undo}
-                disabled={!canUndo()}
-                aria-label="Undo"
-              >
-                ↶ Undo
-              </button>
+                  <button
+                    className={styles.button}
+                    onClick={() => {
+                      if (confirm('Are you sure you want to quit? Your progress will be saved.')) {
+                        setCurrentScreen('welcome');
+                      }
+                    }}
+                    aria-label="Quit"
+                  >
+                    ✕
+                  </button>
+                </div>
+              </div>
 
-              <button
-                className={`${styles.button} ${styles.actionButton}`}
-                onClick={redo}
-                disabled={!canRedo()}
-                aria-label="Redo"
-              >
-                ↷ Redo
-              </button>
+              {/* Grid */}
+              <div className={`${styles.gridContainer} ${session.isPaused ? styles.paused : ''}`}>
+                <Grid
+                  grid={session.currentGrid}
+                  selectedCell={session.selectedCell}
+                  onCellClick={selectCell}
+                />
+                {session.isPaused && (
+                  <div className={styles.pausedOverlay}>
+                    <div className={styles.pausedMessage}>
+                      <p>Paused</p>
+                      <button className={styles.resumeButton} onClick={resumeTimer}>
+                        ▶ Resume
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
 
-              <button
-                className={`${styles.button} ${styles.actionButton} ${
-                  session.isNotesMode ? styles.active : ''
-                }`}
-                onClick={toggleNotesMode}
-                aria-label="Toggle Notes Mode"
-              >
-                ✎ Notes
-              </button>
+              <div className={styles.controlsPanel}>
+                {/* Numpad - Primary gameplay controls */}
+                <div className={styles.numpadContainer}>
+                  <NumberPad
+                    grid={session.currentGrid}
+                    onNumberClick={handleNumberClick}
+                    onEraseClick={handleErase}
+                    disabled={session.selectedCell === null || session.isPaused}
+                  />
+                </div>
+
+                {/* Action Buttons - Secondary controls */}
+                <div className={styles.actionButtonsContainer}>
+                  <button
+                    className={`${styles.button} ${styles.actionButton}`}
+                    onClick={undo}
+                    disabled={!canUndo()}
+                    aria-label="Undo"
+                  >
+                    ↶ Undo
+                  </button>
+
+                  <button
+                    className={`${styles.button} ${styles.actionButton}`}
+                    onClick={redo}
+                    disabled={!canRedo()}
+                    aria-label="Redo"
+                  >
+                    ↷ Redo
+                  </button>
+
+                  <button
+                    className={`${styles.button} ${styles.actionButton} ${
+                      session.isNotesMode ? styles.active : ''
+                    }`}
+                    onClick={toggleNotesMode}
+                    aria-label="Toggle Notes Mode"
+                  >
+                    ✎ Notes
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         );

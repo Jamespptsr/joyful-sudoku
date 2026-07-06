@@ -5,87 +5,50 @@
 
 .app {
   min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
 }
 
 .gameContainer {
+  --game-panel-width: min(100%, 500px);
+  --game-gap: 12px;
+  --sudoku-label-width: 32px;
+  --sudoku-grid-gap: 8px;
+  --sudoku-board-offset: calc(var(--sudoku-label-width) + var(--sudoku-grid-gap));
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
   padding: 16px;
   min-height: 100vh;
+  min-height: 100svh;
   background: linear-gradient(135deg, var(--primary-light) 0%, white 100%);
+  overflow-x: hidden;
 }
 
-/* Responsive for limited height screens (ONLY very small screens) */
-@media (max-height: 650px) {
-  .gameContainer {
-    gap: 8px;
-    padding: 10px;
-  }
-}
-
-/* CRITICAL: Very narrow screens - compact layout */
-@media (max-width: 480px) {
-  .gameContainer {
-    gap: 6px;
-    padding: 6px;
-  }
-
-  .header {
-    gap: 6px;
-    width: 95vw;
-  }
-
-  .difficultyBadge {
-    padding: 4px 10px;
-    font-size: 0.75rem;
-  }
-
-  .button {
-    padding: 6px 10px;
-    font-size: 0.85rem;
-  }
-}
-
-@media (max-width: 380px) {
-  .gameContainer {
-    gap: 4px;
-    padding: 4px;
-  }
-
-  .header {
-    gap: 4px;
-    width: 98vw;
-  }
-
-  .difficultyBadge {
-    padding: 3px 6px;
-    font-size: 0.65rem;
-  }
-
-  .button {
-    padding: 4px 6px;
-    font-size: 0.75rem;
-  }
+.gameShell {
+  width: var(--game-panel-width);
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--game-gap);
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 90vw;
-  max-width: 500px;
+  width: 100%;
   gap: 12px;
   flex-shrink: 0;
+  min-width: 0;
 }
 
-@media (max-height: 650px) {
-  .header {
-    gap: 8px;
-  }
+.header > * {
+  min-width: 0;
 }
 
 .difficultyBadge {
@@ -94,14 +57,9 @@
   font-size: 0.875rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-@media (max-height: 650px) {
-  .difficultyBadge {
-    padding: 5px 14px;
-    font-size: 0.8rem;
-  }
+  letter-spacing: 0;
+  white-space: nowrap;
+  flex: 0 0 auto;
 }
 
 /* Difficulty-specific colors */
@@ -123,6 +81,7 @@
 .headerButtons {
   display: flex;
   gap: 8px;
+  flex: 0 0 auto;
 }
 
 .button {
@@ -133,16 +92,11 @@
   border-radius: 8px;
   font-size: 1rem;
   font-weight: 600;
+  min-height: 40px;
+  min-width: 40px;
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-@media (max-height: 650px) {
-  .button {
-    padding: 7px 14px;
-    font-size: 0.95rem;
-  }
 }
 
 .button:hover:not(:disabled) {
@@ -162,25 +116,11 @@
 }
 
 .gridContainer {
-  width: 90vw;
-  max-width: 500px;
-  display: flex;
-  justify-content: center;
+  width: 100%;
   position: relative;
   flex-shrink: 0;
   margin-bottom: 0;
-}
-
-@media (max-width: 480px) {
-  .gridContainer {
-    width: 95vw;
-  }
-}
-
-@media (max-width: 380px) {
-  .gridContainer {
-    width: 98vw;
-  }
+  min-width: 0;
 }
 
 .gridContainer.paused {
@@ -205,8 +145,9 @@
 
 .pausedMessage {
   background-color: white;
-  padding: 32px 48px;
-  border-radius: 16px;
+  width: min(90%, 320px);
+  padding: 24px 32px;
+  border-radius: 8px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   text-align: center;
   filter: blur(0);
@@ -216,7 +157,7 @@
   font-size: 2rem;
   font-weight: 700;
   color: var(--text-primary);
-  margin: 0 0 24px 0;
+  margin: 0 0 16px 0;
 }
 
 .resumeButton {
@@ -238,43 +179,23 @@
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
+.controlsPanel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--game-gap);
+  min-width: 0;
+}
+
 /* Numpad container - Primary gameplay controls */
 .numpadContainer {
-  width: 90vw;
-  max-width: 500px;
+  width: 100%;
   flex-shrink: 0;
   margin-top: 0;
   margin-bottom: 0;
-  padding-left: 40px;
+  padding-left: var(--sudoku-board-offset);
   box-sizing: border-box;
-}
-
-@media (max-width: 600px) {
-  .numpadContainer {
-    padding-left: 32px;
-  }
-}
-
-/* CRITICAL: Very narrow screens - reduce padding to prevent overflow */
-@media (max-width: 480px) {
-  .numpadContainer {
-    width: 95vw;
-    padding-left: 16px;
-  }
-}
-
-@media (max-width: 380px) {
-  .numpadContainer {
-    width: 98vw;
-    padding-left: 12px;
-  }
-}
-
-@media (max-height: 650px) {
-  .numpadContainer {
-    margin-top: 0;
-    padding-left: 28px;
-  }
+  min-width: 0;
 }
 
 /* Action buttons container - Secondary controls */
@@ -282,35 +203,11 @@
   display: flex;
   gap: 8px;
   justify-content: space-between;
-  width: 90vw;
-  max-width: 500px;
+  width: 100%;
   flex-shrink: 0;
-  margin-top: 16px;
+  margin-top: 0;
   margin-bottom: 0;
-}
-
-@media (max-height: 650px) {
-  .actionButtonsContainer {
-    margin-top: 12px;
-    gap: 8px;
-  }
-}
-
-/* CRITICAL: Narrow screens - reduce action button spacing */
-@media (max-width: 480px) {
-  .actionButtonsContainer {
-    width: 95vw;
-    gap: 6px;
-    margin-top: 12px;
-  }
-}
-
-@media (max-width: 380px) {
-  .actionButtonsContainer {
-    width: 98vw;
-    gap: 4px;
-    margin-top: 10px;
-  }
+  min-width: 0;
 }
 
 .actionButton {
@@ -318,30 +215,7 @@
   padding: 10px 12px;
   font-size: 0.9rem;
   min-height: 42px;
-}
-
-@media (max-width: 480px) {
-  .actionButton {
-    padding: 8px 10px;
-    font-size: 0.85rem;
-    min-height: 38px;
-  }
-}
-
-@media (max-width: 380px) {
-  .actionButton {
-    padding: 7px 8px;
-    font-size: 0.8rem;
-    min-height: 36px;
-  }
-}
-
-@media (max-height: 650px) {
-  .actionButton {
-    padding: 8px 10px;
-    font-size: 0.85rem;
-    min-height: 38px;
-  }
+  min-width: 0;
 }
 
 .actionButton.active {
@@ -350,23 +224,17 @@
   color: var(--text-primary);
 }
 
-/* Responsive */
 @media (max-width: 600px) {
   .gameContainer {
-    padding: 16px;
-    gap: 16px;
+    --game-gap: 10px;
+    --sudoku-label-width: 24px;
+    --sudoku-grid-gap: 6px;
+
+    padding: 12px;
   }
 
   .header {
-    max-width: 100%;
-  }
-
-  .gridContainer {
-    max-width: 100%;
-  }
-
-  .controls {
-    max-width: 100%;
+    gap: 8px;
   }
 
   .button {
@@ -377,5 +245,152 @@
   .actionButton {
     padding: 10px 12px;
     font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .gameContainer {
+    --game-gap: 8px;
+    --sudoku-label-width: 16px;
+    --sudoku-grid-gap: 3px;
+
+    padding: 8px;
+  }
+
+  .header {
+    gap: 6px;
+  }
+
+  .difficultyBadge {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+  }
+
+  .headerButtons {
+    gap: 6px;
+  }
+
+  .button {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+
+  .actionButtonsContainer {
+    gap: 6px;
+  }
+
+  .actionButton {
+    padding: 8px 8px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .gameContainer {
+    --game-gap: 6px;
+    --sudoku-label-width: 12px;
+    --sudoku-grid-gap: 2px;
+
+    padding: 6px;
+  }
+
+  .header {
+    gap: 4px;
+  }
+
+  .difficultyBadge {
+    padding: 3px 6px;
+    font-size: 0.68rem;
+  }
+
+  .button {
+    padding: 5px 7px;
+    font-size: 0.75rem;
+  }
+
+  .actionButtonsContainer {
+    gap: 4px;
+  }
+
+  .actionButton {
+    padding: 7px 6px;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-height: 650px) {
+  .gameContainer {
+    --game-gap: 8px;
+
+    padding: 10px;
+  }
+
+  .button {
+    padding: 7px 12px;
+    font-size: 0.9rem;
+  }
+
+  .difficultyBadge {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 520px) and (min-width: 560px) {
+  .gameContainer {
+    --game-panel-width: min(100%, 900px);
+    --game-gap: 8px;
+    --sudoku-label-width: 20px;
+    --sudoku-grid-gap: 4px;
+
+    padding: 8px;
+  }
+
+  .gameShell {
+    width: var(--game-panel-width);
+    max-height: calc(100svh - 16px);
+    display: grid;
+    grid-template-columns: minmax(0, calc(100svh - 16px)) minmax(220px, 1fr);
+    grid-template-rows: auto 1fr;
+    gap: 8px 12px;
+    align-items: start;
+  }
+
+  .header {
+    grid-column: 2;
+    grid-row: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .gridContainer {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    align-self: start;
+  }
+
+  .controlsPanel {
+    grid-column: 2;
+    grid-row: 2;
+    gap: 8px;
+  }
+
+  .numpadContainer {
+    padding-left: 0;
+  }
+
+  .actionButtonsContainer {
+    gap: 6px;
+  }
+
+  .button {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  .actionButton {
+    padding: 8px 8px;
+    font-size: 0.78rem;
   }
 }
